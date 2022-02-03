@@ -60,7 +60,7 @@ def main_menu():
         screen.fill((0,128,255))
         screen.blit(connect_four_text, connect_four_rect)
 
-        label = font.render('Press SPACE to start', 0, (255,255,255))
+        label = font.render('Press Enter to start', 0, (255,255,255))
         label_rect = label.get_rect(midtop = (connect_four_rect.midbottom[0], connect_four_rect.midbottom[1] + 5))
 
         screen.blit(label, label_rect)
@@ -71,7 +71,7 @@ def main_menu():
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_RETURN:
                     main(screen, s_width,block_size)
 
         pygame.display.update()
