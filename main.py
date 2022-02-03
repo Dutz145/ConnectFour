@@ -3,14 +3,17 @@ from connect_four import ConnectFour
 
 pygame.init()
 
+# function that contains the game loop
 def main(screen, s_width, block_size):
     clock = pygame.time.Clock()
     run = True
 
+    # initialize a instance of the game
     connect_four = ConnectFour(block_size)
 
     font = pygame.font.SysFont('comicsans', 45)
 
+    # main loop
     while run:
         clock.tick(60)
         connect_four.update_game(screen, block_size)
@@ -19,6 +22,7 @@ def main(screen, s_width, block_size):
             if event.type == pygame.QUIT:
                 run = False
 
+        # Bliting the message of who won when the game is finished
         if connect_four.game_over:
             if connect_four.status == 'Red wins!':
                 color = (255,0,0)
@@ -39,10 +43,12 @@ def main(screen, s_width, block_size):
 
         pygame.display.update()
 
+# function to initialize the program
 def main_menu():
     clock = pygame.time.Clock()
     font = pygame.font.SysFont('comicsans', 50)
 
+    # creating game setups 
     layout = [[['O', (j,i)] if i > 0 else [' ', (j,i)] for j in range(10)] for i in range(10)]
 
     block_size = 64
@@ -50,11 +56,13 @@ def main_menu():
     screen = pygame.display.set_mode((s_width, s_height))
     pygame.display.set_caption('Connect Four')
 
+    # importing and transforming the scale of the title
     connect_four_text = pygame.image.load('connect_four.png').convert_alpha()
     connect_four_text = pygame.transform.scale(connect_four_text, (442.75, 253.5))
 
     connect_four_rect = connect_four_text.get_rect(center = (s_width//2, s_height//4))
 
+    # main loop
     while True:
         clock.tick(60)
         screen.fill((0,128,255))
@@ -70,6 +78,7 @@ def main_menu():
                 pygame.quit()
                 sys.exit()
 
+            # Press enter to start the game
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     main(screen, s_width,block_size)

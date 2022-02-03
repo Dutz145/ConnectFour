@@ -5,15 +5,18 @@ pygame.init()
 
 class ConnectFour:
     def __init__(self, block_size):
+        # initializing the grid of the game and defining player's turn
         self.layout = [[['O', (j,i)] if i > 0 else [' ', (j,i)] for j in range(10)] for i in range(10)]
         self.turn = 'Red'
 
+        # creating the players
         self.red = Player('R', block_size, self.layout)
         self.yellow = Player('Y', block_size, self.layout)
 
         self.circle_width = 20
         self.cooldown_counter = 0
 
+        # game status
         self.game_over = False
         self.status = 'Playing'
 
@@ -23,6 +26,7 @@ class ConnectFour:
         if self.cooldown_counter > 15:
             self.cooldown_counter = 0
 
+    # drawing the game
     def draw_layout(self, screen, block_size):
         screen.fill((0,128,255))
 
@@ -57,6 +61,7 @@ class ConnectFour:
             pygame.draw.circle(screen, (204, 204, 0), ((self.yellow.rect.x * block_size) + block_size/2, 
                 (self.yellow.rect.y * block_size) + block_size/2), 25, 5)
 
+    # checking if there is a tie
     def check_tie(self):
         for row in self.layout:
             for col in row:
@@ -66,6 +71,7 @@ class ConnectFour:
         self.game_over = True
         self.status = "It's a tie!"
 
+    # checking if one of the players won the game
     def check_win(self):
         for row in self.layout:
             for col in row:
@@ -173,7 +179,7 @@ class ConnectFour:
                     except:
                         pass
  
-
+    # updating the game window
     def update_game(self, screen, block_size):
         self.draw_layout(screen, block_size)
         self.cooldown()

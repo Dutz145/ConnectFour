@@ -8,9 +8,11 @@ class Player:
         self.rect = self.image.get_rect(topleft = (0,len(layout) - 1))
         self.color = color
 
+    # check for player input
     def move(self, game_obj):
         keys = pygame.key.get_pressed()
 
+        # movement
         if keys[pygame.K_RIGHT] and self.rect.x < len(game_obj.layout[0]) - 1 and game_obj.cooldown_counter == 0:
             game_obj.cooldown_counter = 1
             self.rect.x += 1
@@ -27,7 +29,7 @@ class Player:
             game_obj.cooldown_counter = 1
             self.rect.y += 1
 
-
+        # placing a ball
         if keys[pygame.K_SPACE] and game_obj.cooldown_counter == 0:
             game_obj.cooldown_counter = 1
 
@@ -48,6 +50,6 @@ class Player:
                 elif self.color == 'Y':
                     game_obj.turn = 'Red'
 
-
+    # updating the player input
     def update(self, game_obj):
         self.move(game_obj)
